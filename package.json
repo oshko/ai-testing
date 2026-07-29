@@ -1,0 +1,57 @@
+{
+  "name": "kyc-aml-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TechSpark Solutions - Conversational KYC & AML Compliance Platform (GenAI-assisted test engineering project)",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:migrate": "node src/db/migrate.js",
+    "db:migrate:test": "NODE_ENV=test node src/db/migrate.js",
+    "db:reset": "node src/db/migrate.js --reset",
+    "db:reset:test": "NODE_ENV=test node src/db/migrate.js --reset",
+    "data:generate": "node scripts/generate-synthetic-data.js",
+    "db:seed": "node scripts/seed-database.js",
+    "db:seed:test": "NODE_ENV=test node scripts/seed-database.js",
+    "test": "NODE_ENV=test jest --runInBand",
+    "test:unit": "NODE_ENV=test jest --runInBand tests/unit",
+    "test:integration": "NODE_ENV=test jest --runInBand tests/integration",
+    "test:report": "NODE_ENV=test jest --runInBand --json --outputFile=reports/jest-results.json",
+    "rtm": "node scripts/generate-rtm.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "globalSetup": "<rootDir>/tests/globalSetup.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup.js"
+    ],
+    "testMatch": [
+      "<rootDir>/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/server.js",
+      "!src/db/migrate.js"
+    ],
+    "testTimeout": 30000,
+    "verbose": true
+  }
+}
