@@ -52,6 +52,7 @@ npm start
 | `npm test` | Run all 91 tests |
 | `npm run test:report` | Run tests, emit `reports/jest-results.json` |
 | `npm run rtm` | Regenerate `docs/03-rtm.md` from the last run |
+| `npm run deliverables` | Merge all six docs into `DELIVERABLES.md` |
 
 ---
 
@@ -130,6 +131,14 @@ data/             generated fixtures (JSON + CSV)
 ---
 
 ## Documentation
+
+**[DELIVERABLES.md](DELIVERABLES.md) — all six documents merged into one file** with a table of contents and a rubric-criterion map. This is the single file to submit or print. Regenerate it after any test change:
+
+```bash
+npm run test:report && npm run rtm && npm run deliverables
+```
+
+The six sources, if you prefer them separately:
 
 | Doc | Contents |
 |---|---|
