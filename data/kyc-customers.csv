@@ -1,0 +1,51 @@
+id,scenario,full_name,date_of_birth,email,country,occupation,annual_income,is_pep
+KYC-LOW-01,"Standard low-risk applicant, complete data",Alice Morgan,1990-04-12,alice.morgan@example.com,GB,ENGINEER,85000,false
+KYC-MED-01,Medium risk - high-risk occupation in a standard country,Bruno Castellano,1982-11-03,bruno.castellano@example.com,US,MONEY SERVICE BUSINESS,240000,false
+KYC-HIGH-01,"High risk - PEP in a high-risk jurisdiction, routed to EDD",Helena Brandt,1975-02-19,helena.brandt@example.com,XB,GOVERNMENT OFFICIAL,310000,true
+KYC-PROH-01,Prohibited jurisdiction - rejected outright,Ingrid Lindqvist,1988-07-30,ingrid.lindqvist@example.com,ZZ,BUSINESS OWNER,95000,false
+KYC-SANC-01,Name matches a sanctions list entry - rejected,Viktor Kessler,1970-01-15,viktor.kessler@example.com,DE,BUSINESS OWNER,500000,false
+KYC-INV-01,Underage applicant - must be rejected,Timo Jansen,2012-01-01,timo.jansen@example.com,US,STUDENT,0,false
+KYC-INV-02,Missing mandatory country field,Petra Varga,1991-09-09,petra.varga@example.com,,TEACHER,52000,false
+KYC-INV-03,Malformed email address,Omar Haddad,1986-03-22,omar.haddad-at-example.com,FR,DOCTOR,180000,false
+KYC-INV-04,Duplicate email of KYC-LOW-01,Alice Morgan Duplicate,1990-04-12,alice.morgan@example.com,GB,ENGINEER,85000,false
+KYC-UNK-01,Unrecognised country code - fails closed to elevated risk,Wesley Tremblay,1979-12-05,wesley.tremblay@example.com,QQ,,,false
+KYC-BULK-001,Bulk generated applicant,Mira Okonkwo,1975-04-30,mira.okonkwo.1@example.com,IN,CRYPTO TRADER,326000,false
+KYC-BULK-002,Bulk generated applicant,Tanya Borisov,1954-03-10,tanya.borisov.2@example.com,QM,ENGINEER,275000,false
+KYC-BULK-003,Bulk generated applicant,Zara Tremblay,1998-08-23,zara.tremblay.3@example.com,BR,TEACHER,311000,false
+KYC-BULK-004,Bulk generated applicant,Tanya Lindqvist,1962-06-02,tanya.lindqvist.4@example.com,ZA,ENGINEER,282000,false
+KYC-BULK-005,Bulk generated applicant,Samir Nakamura,2007-03-02,samir.nakamura.5@example.com,BR,ENGINEER,219000,false
+KYC-BULK-006,Bulk generated applicant,Wesley Grimaldi,1996-09-07,wesley.grimaldi.6@example.com,ZZ,RETIRED,161000,false
+KYC-BULK-007,Bulk generated applicant,Lucas Ivanov,1997-03-12,lucas.ivanov.7@example.com,ZA,RETIRED,216000,false
+KYC-BULK-008,Bulk generated applicant,Samir Kowalski,1948-09-11,samir.kowalski.8@example.com,DE,RETIRED,187000,false
+KYC-BULK-009,Bulk generated applicant,Samir Adeyemi,1991-06-29,samir.adeyemi.9@example.com,AU,DOCTOR,392000,false
+KYC-BULK-010,Bulk generated applicant,Vera Adeyemi,2006-11-15,vera.adeyemi.10@example.com,BR,DOCTOR,99000,false
+KYC-BULK-011,Bulk generated applicant,Ugo Kowalski,1999-10-25,ugo.kowalski.11@example.com,GB,TEACHER,353000,false
+KYC-BULK-012,Bulk generated applicant,Carmen Lindqvist,1981-09-01,carmen.lindqvist.12@example.com,GB,MONEY SERVICE BUSINESS,120000,false
+KYC-BULK-013,Bulk generated applicant,Yusuf Ivanov,1998-11-03,yusuf.ivanov.13@example.com,CA,TEACHER,362000,false
+KYC-BULK-014,Bulk generated applicant,Omar Borisov,1966-11-29,omar.borisov.14@example.com,ZZ,TEACHER,295000,false
+KYC-BULK-015,Bulk generated applicant,Farid Moreau,1962-12-23,farid.moreau.15@example.com,DE,MONEY SERVICE BUSINESS,86000,false
+KYC-BULK-016,Bulk generated applicant,Lucas Jansen,1999-08-07,lucas.jansen.16@example.com,ZZ,CASH INTENSIVE BUSINESS,84000,false
+KYC-BULK-017,Bulk generated applicant,Alice Borisov,1960-10-21,alice.borisov.17@example.com,ZZ,TEACHER,267000,false
+KYC-BULK-018,Bulk generated applicant,Tanya Pereira,2001-01-27,tanya.pereira.18@example.com,BR,RETIRED,125000,false
+KYC-BULK-019,Bulk generated applicant,Dmitri Borisov,2005-02-06,dmitri.borisov.19@example.com,XP,DOCTOR,222000,false
+KYC-BULK-020,Bulk generated applicant,Ingrid Duarte,1979-05-25,ingrid.duarte.20@example.com,AU,DOCTOR,172000,false
+KYC-BULK-021,Bulk generated applicant,Mira Pereira,1958-03-17,mira.pereira.21@example.com,SG,GOVERNMENT OFFICIAL,358000,false
+KYC-BULK-022,Bulk generated applicant,Dmitri Silva,1957-03-02,dmitri.silva.22@example.com,CA,DOCTOR,384000,false
+KYC-BULK-023,Bulk generated applicant,Farid Duarte,2001-02-18,farid.duarte.23@example.com,GB,ENGINEER,204000,false
+KYC-BULK-024,Bulk generated applicant,Zara Ustinov,1961-11-18,zara.ustinov.24@example.com,XB,ENGINEER,162000,false
+KYC-BULK-025,Bulk generated applicant,Alice Grimaldi,1985-06-13,alice.grimaldi.25@example.com,XA,ENGINEER,315000,false
+KYC-BULK-026,Bulk generated applicant,Karin Eriksen,1961-11-26,karin.eriksen.26@example.com,XP,DOCTOR,84000,false
+KYC-BULK-027,Bulk generated applicant,Lucas Borisov,1997-10-29,lucas.borisov.27@example.com,ZA,RETIRED,396000,false
+KYC-BULK-028,Bulk generated applicant,Rosa Ivanov,1969-07-26,rosa.ivanov.28@example.com,ZA,TEACHER,337000,false
+KYC-BULK-029,Bulk generated applicant,Omar Ivanov,1986-06-04,omar.ivanov.29@example.com,CA,ENGINEER,277000,false
+KYC-BULK-030,Bulk generated applicant,Dmitri Rahman,1960-02-03,dmitri.rahman.30@example.com,XA,MONEY SERVICE BUSINESS,348000,false
+KYC-BULK-031,Bulk generated applicant,Vera Duarte,1999-01-28,vera.duarte.31@example.com,ZZ,TEACHER,175000,false
+KYC-BULK-032,Bulk generated applicant,Tanya Whitfield,1978-12-11,tanya.whitfield.32@example.com,BR,CRYPTO TRADER,42000,false
+KYC-BULK-033,Bulk generated applicant,Omar Eriksen,1961-07-22,omar.eriksen.33@example.com,BR,RETIRED,255000,false
+KYC-BULK-034,Bulk generated applicant,Jonas Grimaldi,1979-06-06,jonas.grimaldi.34@example.com,DE,RETIRED,94000,false
+KYC-BULK-035,Bulk generated applicant,Samir Rahman,1985-10-30,samir.rahman.35@example.com,ZA,DOCTOR,374000,false
+KYC-BULK-036,Bulk generated applicant,Yusuf Castellano,1969-02-22,yusuf.castellano.36@example.com,QM,MONEY SERVICE BUSINESS,225000,false
+KYC-BULK-037,Bulk generated applicant,Hassan Ustinov,1984-05-10,hassan.ustinov.37@example.com,SG,DOCTOR,244000,true
+KYC-BULK-038,Bulk generated applicant,Alice Moreau,1966-07-05,alice.moreau.38@example.com,XP,MONEY SERVICE BUSINESS,396000,false
+KYC-BULK-039,Bulk generated applicant,Vera Fontaine,1978-06-14,vera.fontaine.39@example.com,XP,DOCTOR,164000,true
+KYC-BULK-040,Bulk generated applicant,Dmitri Moreau,1992-05-27,dmitri.moreau.40@example.com,SG,TEACHER,240000,false

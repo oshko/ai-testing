@@ -1,0 +1,24 @@
+scenario_id,scenario,seq,amount,channel,direction,counterparty_country,offset_hours,expected_rules
+AML-S01,Cash deposit exactly at the reporting threshold (inclusive boundary),1,10000,CASH,CREDIT,,0,AML-R01
+AML-S02,Cash deposit one unit below the threshold - must NOT alert,1,9999,CASH,CREDIT,,0,
+AML-S03,"Structuring - three cash deposits in the 50-99% band inside 24h, summing to 18,000",1,6000,CASH,CREDIT,,-20,AML-R02
+AML-S03,"Structuring - three cash deposits in the 50-99% band inside 24h, summing to 18,000",2,6000,CASH,CREDIT,,-10,AML-R02
+AML-S03,"Structuring - three cash deposits in the 50-99% band inside 24h, summing to 18,000",3,6000,CASH,CREDIT,,0,AML-R02
+AML-S04,"Two sub-threshold deposits only - below the minimum count, must NOT alert",1,6000,CASH,CREDIT,,-5,
+AML-S04,"Two sub-threshold deposits only - below the minimum count, must NOT alert",2,6000,CASH,CREDIT,,0,
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,1,250,CARD,DEBIT,,-22,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,2,250,CARD,DEBIT,,-20,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,3,250,CARD,DEBIT,,-18,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,4,250,CARD,DEBIT,,-16,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,5,250,CARD,DEBIT,,-14,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,6,250,CARD,DEBIT,,-12,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,7,250,CARD,DEBIT,,-10,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,8,250,CARD,DEBIT,,-8,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,9,250,CARD,DEBIT,,-6,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,10,250,CARD,DEBIT,,-4,AML-R03
+AML-S05,Velocity - 11 transactions in 24h breaches the limit of 10,11,250,CARD,DEBIT,,-2,AML-R03
+AML-S06,Wire to a high-risk jurisdiction above 50% of threshold - escalates to CRITICAL,1,7500,WIRE,DEBIT,XA,0,AML-R04
+AML-S07,Small wire to a high-risk jurisdiction - MEDIUM severity,1,900,WIRE,DEBIT,XB,0,AML-R04
+AML-S08,Any-amount transfer to a prohibited jurisdiction - always CRITICAL,1,150,WIRE,DEBIT,ZZ,0,AML-R04
+AML-S09,Large cash deposit to a high-risk country - two rules fire together,1,25000,CASH,CREDIT,QM,0,AML-R01|AML-R04
+AML-S10,"Ordinary salary credit - clean baseline, no alerts",1,4200,ACH,CREDIT,,0,

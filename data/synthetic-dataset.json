@@ -1,0 +1,1031 @@
+{
+  "meta": {
+    "generated_for": "TechSpark Solutions KYC/AML platform",
+    "seed": 20260729,
+    "note": "All data is fictional. High-risk/prohibited jurisdictions use reserved ISO codes.",
+    "counts": {
+      "customers": 50,
+      "edge_case_customers": 10,
+      "documents": 6,
+      "watchlist": 6,
+      "aml_scenarios": 10,
+      "aml_transactions": 23,
+      "chat_utterances": 12
+    }
+  },
+  "watchlist": [
+    {
+      "list_type": "SANCTIONS",
+      "full_name": "Viktor Kessler",
+      "country": "ZZ"
+    },
+    {
+      "list_type": "SANCTIONS",
+      "full_name": "Dana Okonkwo",
+      "country": "XP"
+    },
+    {
+      "list_type": "SANCTIONS",
+      "full_name": "Marcus Vane",
+      "country": "XA"
+    },
+    {
+      "list_type": "PEP",
+      "full_name": "Helena Brandt",
+      "country": "XB"
+    },
+    {
+      "list_type": "PEP",
+      "full_name": "Yusuf Rahman",
+      "country": "QM"
+    },
+    {
+      "list_type": "PEP",
+      "full_name": "Clara Nunes",
+      "country": "BR"
+    }
+  ],
+  "kyc_customers": [
+    {
+      "id": "KYC-LOW-01",
+      "scenario": "Standard low-risk applicant, complete data",
+      "full_name": "Alice Morgan",
+      "date_of_birth": "1990-04-12",
+      "email": "alice.morgan@example.com",
+      "country": "GB",
+      "occupation": "ENGINEER",
+      "annual_income": 85000,
+      "is_pep": false,
+      "expected": {
+        "valid": true,
+        "rating": "LOW",
+        "kyc_status": "PENDING"
+      }
+    },
+    {
+      "id": "KYC-MED-01",
+      "scenario": "Medium risk - high-risk occupation in a standard country",
+      "full_name": "Bruno Castellano",
+      "date_of_birth": "1982-11-03",
+      "email": "bruno.castellano@example.com",
+      "country": "US",
+      "occupation": "MONEY SERVICE BUSINESS",
+      "annual_income": 240000,
+      "is_pep": false,
+      "expected": {
+        "valid": true,
+        "rating": "MEDIUM",
+        "kyc_status": "PENDING"
+      }
+    },
+    {
+      "id": "KYC-HIGH-01",
+      "scenario": "High risk - PEP in a high-risk jurisdiction, routed to EDD",
+      "full_name": "Helena Brandt",
+      "date_of_birth": "1975-02-19",
+      "email": "helena.brandt@example.com",
+      "country": "XB",
+      "occupation": "GOVERNMENT OFFICIAL",
+      "annual_income": 310000,
+      "is_pep": true,
+      "expected": {
+        "valid": true,
+        "rating": "HIGH",
+        "kyc_status": "IN_REVIEW",
+        "edd_required": true
+      }
+    },
+    {
+      "id": "KYC-PROH-01",
+      "scenario": "Prohibited jurisdiction - rejected outright",
+      "full_name": "Ingrid Lindqvist",
+      "date_of_birth": "1988-07-30",
+      "email": "ingrid.lindqvist@example.com",
+      "country": "ZZ",
+      "occupation": "BUSINESS OWNER",
+      "annual_income": 95000,
+      "is_pep": false,
+      "expected": {
+        "valid": true,
+        "rating": "PROHIBITED",
+        "kyc_status": "REJECTED"
+      }
+    },
+    {
+      "id": "KYC-SANC-01",
+      "scenario": "Name matches a sanctions list entry - rejected",
+      "full_name": "Viktor Kessler",
+      "date_of_birth": "1970-01-15",
+      "email": "viktor.kessler@example.com",
+      "country": "DE",
+      "occupation": "BUSINESS OWNER",
+      "annual_income": 500000,
+      "is_pep": false,
+      "expected": {
+        "valid": true,
+        "rating": "PROHIBITED",
+        "kyc_status": "REJECTED",
+        "sanctions_match": true
+      }
+    },
+    {
+      "id": "KYC-INV-01",
+      "scenario": "Underage applicant - must be rejected",
+      "full_name": "Timo Jansen",
+      "date_of_birth": "2012-01-01",
+      "email": "timo.jansen@example.com",
+      "country": "US",
+      "occupation": "STUDENT",
+      "annual_income": 0,
+      "is_pep": false,
+      "expected": {
+        "valid": false,
+        "error_code": "UNDERAGE_APPLICANT"
+      }
+    },
+    {
+      "id": "KYC-INV-02",
+      "scenario": "Missing mandatory country field",
+      "full_name": "Petra Varga",
+      "date_of_birth": "1991-09-09",
+      "email": "petra.varga@example.com",
+      "country": "",
+      "occupation": "TEACHER",
+      "annual_income": 52000,
+      "is_pep": false,
+      "expected": {
+        "valid": false,
+        "error_code": "VALIDATION_ERROR",
+        "invalid_fields": [
+          "country"
+        ]
+      }
+    },
+    {
+      "id": "KYC-INV-03",
+      "scenario": "Malformed email address",
+      "full_name": "Omar Haddad",
+      "date_of_birth": "1986-03-22",
+      "email": "omar.haddad-at-example.com",
+      "country": "FR",
+      "occupation": "DOCTOR",
+      "annual_income": 180000,
+      "is_pep": false,
+      "expected": {
+        "valid": false,
+        "error_code": "VALIDATION_ERROR",
+        "invalid_fields": [
+          "email"
+        ]
+      }
+    },
+    {
+      "id": "KYC-INV-04",
+      "scenario": "Duplicate email of KYC-LOW-01",
+      "full_name": "Alice Morgan Duplicate",
+      "date_of_birth": "1990-04-12",
+      "email": "alice.morgan@example.com",
+      "country": "GB",
+      "occupation": "ENGINEER",
+      "annual_income": 85000,
+      "is_pep": false,
+      "expected": {
+        "valid": false,
+        "error_code": "DUPLICATE_CUSTOMER"
+      }
+    },
+    {
+      "id": "KYC-UNK-01",
+      "scenario": "Unrecognised country code - fails closed to elevated risk",
+      "full_name": "Wesley Tremblay",
+      "date_of_birth": "1979-12-05",
+      "email": "wesley.tremblay@example.com",
+      "country": "QQ",
+      "occupation": null,
+      "annual_income": null,
+      "is_pep": false,
+      "expected": {
+        "valid": true,
+        "rating": "MEDIUM"
+      }
+    },
+    {
+      "id": "KYC-BULK-001",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Mira Okonkwo",
+      "date_of_birth": "1975-04-30",
+      "email": "mira.okonkwo.1@example.com",
+      "country": "IN",
+      "occupation": "CRYPTO TRADER",
+      "annual_income": 326000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-002",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Tanya Borisov",
+      "date_of_birth": "1954-03-10",
+      "email": "tanya.borisov.2@example.com",
+      "country": "QM",
+      "occupation": "ENGINEER",
+      "annual_income": 275000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-003",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Zara Tremblay",
+      "date_of_birth": "1998-08-23",
+      "email": "zara.tremblay.3@example.com",
+      "country": "BR",
+      "occupation": "TEACHER",
+      "annual_income": 311000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-004",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Tanya Lindqvist",
+      "date_of_birth": "1962-06-02",
+      "email": "tanya.lindqvist.4@example.com",
+      "country": "ZA",
+      "occupation": "ENGINEER",
+      "annual_income": 282000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-005",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Samir Nakamura",
+      "date_of_birth": "2007-03-02",
+      "email": "samir.nakamura.5@example.com",
+      "country": "BR",
+      "occupation": "ENGINEER",
+      "annual_income": 219000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-006",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Wesley Grimaldi",
+      "date_of_birth": "1996-09-07",
+      "email": "wesley.grimaldi.6@example.com",
+      "country": "ZZ",
+      "occupation": "RETIRED",
+      "annual_income": 161000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-007",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Lucas Ivanov",
+      "date_of_birth": "1997-03-12",
+      "email": "lucas.ivanov.7@example.com",
+      "country": "ZA",
+      "occupation": "RETIRED",
+      "annual_income": 216000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-008",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Samir Kowalski",
+      "date_of_birth": "1948-09-11",
+      "email": "samir.kowalski.8@example.com",
+      "country": "DE",
+      "occupation": "RETIRED",
+      "annual_income": 187000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-009",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Samir Adeyemi",
+      "date_of_birth": "1991-06-29",
+      "email": "samir.adeyemi.9@example.com",
+      "country": "AU",
+      "occupation": "DOCTOR",
+      "annual_income": 392000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-010",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Vera Adeyemi",
+      "date_of_birth": "2006-11-15",
+      "email": "vera.adeyemi.10@example.com",
+      "country": "BR",
+      "occupation": "DOCTOR",
+      "annual_income": 99000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-011",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Ugo Kowalski",
+      "date_of_birth": "1999-10-25",
+      "email": "ugo.kowalski.11@example.com",
+      "country": "GB",
+      "occupation": "TEACHER",
+      "annual_income": 353000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-012",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Carmen Lindqvist",
+      "date_of_birth": "1981-09-01",
+      "email": "carmen.lindqvist.12@example.com",
+      "country": "GB",
+      "occupation": "MONEY SERVICE BUSINESS",
+      "annual_income": 120000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-013",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Yusuf Ivanov",
+      "date_of_birth": "1998-11-03",
+      "email": "yusuf.ivanov.13@example.com",
+      "country": "CA",
+      "occupation": "TEACHER",
+      "annual_income": 362000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-014",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Omar Borisov",
+      "date_of_birth": "1966-11-29",
+      "email": "omar.borisov.14@example.com",
+      "country": "ZZ",
+      "occupation": "TEACHER",
+      "annual_income": 295000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-015",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Farid Moreau",
+      "date_of_birth": "1962-12-23",
+      "email": "farid.moreau.15@example.com",
+      "country": "DE",
+      "occupation": "MONEY SERVICE BUSINESS",
+      "annual_income": 86000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-016",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Lucas Jansen",
+      "date_of_birth": "1999-08-07",
+      "email": "lucas.jansen.16@example.com",
+      "country": "ZZ",
+      "occupation": "CASH INTENSIVE BUSINESS",
+      "annual_income": 84000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-017",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Alice Borisov",
+      "date_of_birth": "1960-10-21",
+      "email": "alice.borisov.17@example.com",
+      "country": "ZZ",
+      "occupation": "TEACHER",
+      "annual_income": 267000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-018",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Tanya Pereira",
+      "date_of_birth": "2001-01-27",
+      "email": "tanya.pereira.18@example.com",
+      "country": "BR",
+      "occupation": "RETIRED",
+      "annual_income": 125000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-019",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Dmitri Borisov",
+      "date_of_birth": "2005-02-06",
+      "email": "dmitri.borisov.19@example.com",
+      "country": "XP",
+      "occupation": "DOCTOR",
+      "annual_income": 222000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-020",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Ingrid Duarte",
+      "date_of_birth": "1979-05-25",
+      "email": "ingrid.duarte.20@example.com",
+      "country": "AU",
+      "occupation": "DOCTOR",
+      "annual_income": 172000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-021",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Mira Pereira",
+      "date_of_birth": "1958-03-17",
+      "email": "mira.pereira.21@example.com",
+      "country": "SG",
+      "occupation": "GOVERNMENT OFFICIAL",
+      "annual_income": 358000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-022",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Dmitri Silva",
+      "date_of_birth": "1957-03-02",
+      "email": "dmitri.silva.22@example.com",
+      "country": "CA",
+      "occupation": "DOCTOR",
+      "annual_income": 384000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-023",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Farid Duarte",
+      "date_of_birth": "2001-02-18",
+      "email": "farid.duarte.23@example.com",
+      "country": "GB",
+      "occupation": "ENGINEER",
+      "annual_income": 204000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-024",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Zara Ustinov",
+      "date_of_birth": "1961-11-18",
+      "email": "zara.ustinov.24@example.com",
+      "country": "XB",
+      "occupation": "ENGINEER",
+      "annual_income": 162000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-025",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Alice Grimaldi",
+      "date_of_birth": "1985-06-13",
+      "email": "alice.grimaldi.25@example.com",
+      "country": "XA",
+      "occupation": "ENGINEER",
+      "annual_income": 315000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-026",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Karin Eriksen",
+      "date_of_birth": "1961-11-26",
+      "email": "karin.eriksen.26@example.com",
+      "country": "XP",
+      "occupation": "DOCTOR",
+      "annual_income": 84000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-027",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Lucas Borisov",
+      "date_of_birth": "1997-10-29",
+      "email": "lucas.borisov.27@example.com",
+      "country": "ZA",
+      "occupation": "RETIRED",
+      "annual_income": 396000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-028",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Rosa Ivanov",
+      "date_of_birth": "1969-07-26",
+      "email": "rosa.ivanov.28@example.com",
+      "country": "ZA",
+      "occupation": "TEACHER",
+      "annual_income": 337000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-029",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Omar Ivanov",
+      "date_of_birth": "1986-06-04",
+      "email": "omar.ivanov.29@example.com",
+      "country": "CA",
+      "occupation": "ENGINEER",
+      "annual_income": 277000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-030",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Dmitri Rahman",
+      "date_of_birth": "1960-02-03",
+      "email": "dmitri.rahman.30@example.com",
+      "country": "XA",
+      "occupation": "MONEY SERVICE BUSINESS",
+      "annual_income": 348000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-031",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Vera Duarte",
+      "date_of_birth": "1999-01-28",
+      "email": "vera.duarte.31@example.com",
+      "country": "ZZ",
+      "occupation": "TEACHER",
+      "annual_income": 175000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-032",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Tanya Whitfield",
+      "date_of_birth": "1978-12-11",
+      "email": "tanya.whitfield.32@example.com",
+      "country": "BR",
+      "occupation": "CRYPTO TRADER",
+      "annual_income": 42000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-033",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Omar Eriksen",
+      "date_of_birth": "1961-07-22",
+      "email": "omar.eriksen.33@example.com",
+      "country": "BR",
+      "occupation": "RETIRED",
+      "annual_income": 255000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-034",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Jonas Grimaldi",
+      "date_of_birth": "1979-06-06",
+      "email": "jonas.grimaldi.34@example.com",
+      "country": "DE",
+      "occupation": "RETIRED",
+      "annual_income": 94000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-035",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Samir Rahman",
+      "date_of_birth": "1985-10-30",
+      "email": "samir.rahman.35@example.com",
+      "country": "ZA",
+      "occupation": "DOCTOR",
+      "annual_income": 374000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-036",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Yusuf Castellano",
+      "date_of_birth": "1969-02-22",
+      "email": "yusuf.castellano.36@example.com",
+      "country": "QM",
+      "occupation": "MONEY SERVICE BUSINESS",
+      "annual_income": 225000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-037",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Hassan Ustinov",
+      "date_of_birth": "1984-05-10",
+      "email": "hassan.ustinov.37@example.com",
+      "country": "SG",
+      "occupation": "DOCTOR",
+      "annual_income": 244000,
+      "is_pep": true
+    },
+    {
+      "id": "KYC-BULK-038",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Alice Moreau",
+      "date_of_birth": "1966-07-05",
+      "email": "alice.moreau.38@example.com",
+      "country": "XP",
+      "occupation": "MONEY SERVICE BUSINESS",
+      "annual_income": 396000,
+      "is_pep": false
+    },
+    {
+      "id": "KYC-BULK-039",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Vera Fontaine",
+      "date_of_birth": "1978-06-14",
+      "email": "vera.fontaine.39@example.com",
+      "country": "XP",
+      "occupation": "DOCTOR",
+      "annual_income": 164000,
+      "is_pep": true
+    },
+    {
+      "id": "KYC-BULK-040",
+      "scenario": "Bulk generated applicant",
+      "full_name": "Dmitri Moreau",
+      "date_of_birth": "1992-05-27",
+      "email": "dmitri.moreau.40@example.com",
+      "country": "SG",
+      "occupation": "TEACHER",
+      "annual_income": 240000,
+      "is_pep": false
+    }
+  ],
+  "kyc_documents": [
+    {
+      "id": "DOC-OK-ID",
+      "scenario": "Valid passport",
+      "document_type": "PASSPORT",
+      "document_number": "AB123456",
+      "expiry_date": "2029-01-14",
+      "expected": {
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "id": "DOC-OK-ADDR",
+      "scenario": "Valid utility bill (address proof)",
+      "document_type": "UTILITY_BILL",
+      "document_number": "UTIL-99213",
+      "expiry_date": null,
+      "expected": {
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "id": "DOC-EXPIRED",
+      "scenario": "Passport expired last year",
+      "document_type": "PASSPORT",
+      "document_number": "CD987654",
+      "expiry_date": "2026-01-10",
+      "expected": {
+        "status": "EXPIRED"
+      }
+    },
+    {
+      "id": "DOC-BADFORMAT",
+      "scenario": "Passport number fails the format rule",
+      "document_type": "PASSPORT",
+      "document_number": "12",
+      "expiry_date": "2029-01-14",
+      "expected": {
+        "status": "FAILED",
+        "failure_reason_contains": "format"
+      }
+    },
+    {
+      "id": "DOC-NOEXPIRY",
+      "scenario": "Passport supplied without an expiry date",
+      "document_type": "PASSPORT",
+      "document_number": "EF456789",
+      "expiry_date": null,
+      "expected": {
+        "status": "FAILED",
+        "failure_reason_contains": "Expiry"
+      }
+    },
+    {
+      "id": "DOC-UNSUPPORTED",
+      "scenario": "Document type not accepted",
+      "document_type": "LIBRARY_CARD",
+      "document_number": "LC-0001",
+      "expiry_date": null,
+      "expected": {
+        "rejected_with": "UNSUPPORTED_DOCUMENT_TYPE"
+      }
+    }
+  ],
+  "aml_scenarios": [
+    {
+      "id": "AML-S01",
+      "scenario": "Cash deposit exactly at the reporting threshold (inclusive boundary)",
+      "expected_rules": [
+        "AML-R01"
+      ],
+      "transactions": [
+        {
+          "amount": 10000,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S02",
+      "scenario": "Cash deposit one unit below the threshold - must NOT alert",
+      "expected_rules": [],
+      "transactions": [
+        {
+          "amount": 9999,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S03",
+      "scenario": "Structuring - three cash deposits in the 50-99% band inside 24h, summing to 18,000",
+      "expected_rules": [
+        "AML-R02"
+      ],
+      "transactions": [
+        {
+          "amount": 6000,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "offset_hours": -20
+        },
+        {
+          "amount": 6000,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "offset_hours": -10
+        },
+        {
+          "amount": 6000,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S04",
+      "scenario": "Two sub-threshold deposits only - below the minimum count, must NOT alert",
+      "expected_rules": [],
+      "transactions": [
+        {
+          "amount": 6000,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "offset_hours": -5
+        },
+        {
+          "amount": 6000,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S05",
+      "scenario": "Velocity - 11 transactions in 24h breaches the limit of 10",
+      "expected_rules": [
+        "AML-R03"
+      ],
+      "transactions": [
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -22
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -20
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -18
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -16
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -14
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -12
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -10
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -8
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -6
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -4
+        },
+        {
+          "amount": 250,
+          "channel": "CARD",
+          "direction": "DEBIT",
+          "offset_hours": -2
+        }
+      ]
+    },
+    {
+      "id": "AML-S06",
+      "scenario": "Wire to a high-risk jurisdiction above 50% of threshold - escalates to CRITICAL",
+      "expected_rules": [
+        "AML-R04"
+      ],
+      "expected_severity": "CRITICAL",
+      "transactions": [
+        {
+          "amount": 7500,
+          "channel": "WIRE",
+          "direction": "DEBIT",
+          "counterparty_country": "XA",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S07",
+      "scenario": "Small wire to a high-risk jurisdiction - MEDIUM severity",
+      "expected_rules": [
+        "AML-R04"
+      ],
+      "expected_severity": "MEDIUM",
+      "transactions": [
+        {
+          "amount": 900,
+          "channel": "WIRE",
+          "direction": "DEBIT",
+          "counterparty_country": "XB",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S08",
+      "scenario": "Any-amount transfer to a prohibited jurisdiction - always CRITICAL",
+      "expected_rules": [
+        "AML-R04"
+      ],
+      "expected_severity": "CRITICAL",
+      "transactions": [
+        {
+          "amount": 150,
+          "channel": "WIRE",
+          "direction": "DEBIT",
+          "counterparty_country": "ZZ",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S09",
+      "scenario": "Large cash deposit to a high-risk country - two rules fire together",
+      "expected_rules": [
+        "AML-R01",
+        "AML-R04"
+      ],
+      "transactions": [
+        {
+          "amount": 25000,
+          "channel": "CASH",
+          "direction": "CREDIT",
+          "counterparty_country": "QM",
+          "offset_hours": 0
+        }
+      ]
+    },
+    {
+      "id": "AML-S10",
+      "scenario": "Ordinary salary credit - clean baseline, no alerts",
+      "expected_rules": [],
+      "transactions": [
+        {
+          "amount": 4200,
+          "channel": "ACH",
+          "direction": "CREDIT",
+          "offset_hours": 0
+        }
+      ]
+    }
+  ],
+  "chat_utterances": [
+    {
+      "id": "NLP-01",
+      "message": "Hello there",
+      "expected_intent": "greeting"
+    },
+    {
+      "id": "NLP-02",
+      "message": "I want to open an account",
+      "expected_intent": "onboarding_start"
+    },
+    {
+      "id": "NLP-03",
+      "message": "Which documents do you need from me?",
+      "expected_intent": "upload_document"
+    },
+    {
+      "id": "NLP-04",
+      "message": "What is my kyc status?",
+      "expected_intent": "check_kyc_status"
+    },
+    {
+      "id": "NLP-05",
+      "message": "CHECK MY STATUS!!!",
+      "expected_intent": "check_kyc_status",
+      "note": "case and punctuation insensitive"
+    },
+    {
+      "id": "NLP-06",
+      "message": "Show me open critical alerts",
+      "expected_intent": "query_alerts",
+      "expected_entities": {
+        "ALERT_SEVERITY": "CRITICAL"
+      }
+    },
+    {
+      "id": "NLP-07",
+      "message": "I need to speak to a human",
+      "expected_intent": "human_handoff",
+      "expected_escalation": true
+    },
+    {
+      "id": "NLP-08",
+      "message": "What is the weather in Paris tomorrow?",
+      "expected_intent": "unknown",
+      "expected_escalation": true
+    },
+    {
+      "id": "NLP-09",
+      "message": "I do not want to upload a document",
+      "expected_intent": "unknown",
+      "note": "negation suppresses upload_document"
+    },
+    {
+      "id": "NLP-10",
+      "message": "My name is Elena Fontaine and my email is elena.f@example.com",
+      "expected_entities": {
+        "PERSON_NAME": "Elena Fontaine",
+        "EMAIL": "elena.f@example.com"
+      }
+    },
+    {
+      "id": "NLP-11",
+      "message": "I deposited $9,500 in cash",
+      "expected_entities": {
+        "MONEY_AMOUNT": {
+          "amount": 9500,
+          "currency": "USD"
+        }
+      }
+    },
+    {
+      "id": "NLP-12",
+      "message": "I transferred 12k EUR",
+      "expected_entities": {
+        "MONEY_AMOUNT": {
+          "amount": 12000,
+          "currency": "EUR"
+        }
+      }
+    }
+  ]
+}
